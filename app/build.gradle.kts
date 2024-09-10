@@ -7,38 +7,73 @@
  */
 
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
+    // Plugin do Spring Boot
+    id("org.springframework.boot") version "3.3.3"
+    id("io.spring.dependency-management") version "1.1.6"
+
+    // Aplica os plugins para construir uma aplicação em Java.
     application
+    java
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
+    // Usa o Maven Central para resolver as dependências.
     mavenCentral()
 }
 
 dependencies {
-    // This dependency is used by the application.
-    implementation(libs.guava)
+    // Dependências para Jakarta Persistence (JPA)
+    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+    implementation("org.hibernate.orm:hibernate-core:6.2.9.Final")
+
+    // Dependências do Spring Boot
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
+    // Driver JDBC para PostgreSQL
+    implementation("org.postgresql:postgresql:42.7.2")
+
+    // Flyway para migrações de banco de dados
+    implementation("org.flywaydb:flyway-core:9.22.0")
+
+    // Lombok para gerar código automaticamente como getters, setters, e construtores
+    implementation("org.projectlombok:lombok:1.18.28")
+    annotationProcessor("org.projectlombok:lombok:1.18.28")
+
+    // Dependências para testes
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
+    testImplementation("org.mockito:mockito-core:5.5.0")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-testing {
-    suites {
-        // Configure the built-in test suite
-        val test by getting(JvmTestSuite::class) {
-            // Use JUnit4 test framework
-            useJUnit("4.13.2")
-        }
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+        showExceptions = true
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        showStandardStreams = true
     }
 }
 
-// Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
 
 application {
-    // Define the main class for the application.
-    mainClass = "org.example.App"
+    // Define a classe principal para a aplicação.
+    mainClass.set("org.example.Application")
 }
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
+
