@@ -11,6 +11,8 @@ CREATE TABLE company (
     name VARCHAR(255) NOT NULL,
     cnpj VARCHAR(20) NOT NULL UNIQUE,
     address_id BIGINT REFERENCES address(id)
+    motorcycle_spots INT NOT NULL,
+    car_spots INT NOT NULL
 );
 
 CREATE TABLE phone (
@@ -18,3 +20,6 @@ CREATE TABLE phone (
     phone_number VARCHAR(20) NOT NULL,
     company_id BIGINT REFERENCES company(id)
 );
+
+
+

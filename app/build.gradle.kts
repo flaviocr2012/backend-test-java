@@ -10,10 +10,20 @@ plugins {
     // Plugin do Spring Boot
     id("org.springframework.boot") version "3.3.3"
     id("io.spring.dependency-management") version "1.1.6"
+    id("org.flywaydb.flyway") version "9.22.0"
 
     // Aplica os plugins para construir uma aplicação em Java.
     application
     java
+}
+
+flyway {
+    url = "jdbc:postgresql://localhost:5432/parking_db"
+    user = "user"
+    password = "password"
+    schemas = arrayOf("public")
+    locations = arrayOf("classpath:db/migration")
+
 }
 
 repositories {
@@ -26,15 +36,15 @@ dependencies {
     implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
     implementation("org.hibernate.orm:hibernate-core:6.2.9.Final")
 
+    // Dependência para validação Jakarta
+    implementation("jakarta.validation:jakarta.validation-api:3.0.2")
+
     // Dependências do Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
 
     // Driver JDBC para PostgreSQL
     implementation("org.postgresql:postgresql:42.7.2")
-
-    // Flyway para migrações de banco de dados
-    implementation("org.flywaydb:flyway-core:9.22.0")
 
     // Lombok para gerar código automaticamente como getters, setters, e construtores
     implementation("org.projectlombok:lombok:1.18.28")
@@ -75,5 +85,6 @@ tasks.withType<JavaCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
 
 
