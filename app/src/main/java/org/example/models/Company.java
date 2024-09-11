@@ -43,7 +43,9 @@ public class Company {
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Phone> phones;
 
+    @Column(nullable = false)
     private Integer motorCycleParkingSpot;
 
+    @Column(nullable = false)
     private Integer carParkingSpot;
 }

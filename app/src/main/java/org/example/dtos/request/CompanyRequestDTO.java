@@ -1,5 +1,6 @@
 package org.example.dtos.request;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -29,8 +30,10 @@ public class CompanyRequestDTO {
     private List<PhoneRequestDTO> phones;
 
     @NotNull(message = "Motorcycle spots cannot be null")
+    @Min(1)
     private Integer motorcycleSpots;
 
     @NotNull(message = "Car spots cannot be null")
+    @Min(1)
     private Integer carSpots;
 }
