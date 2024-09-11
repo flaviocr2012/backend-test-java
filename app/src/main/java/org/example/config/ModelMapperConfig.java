@@ -3,9 +3,11 @@ package org.example.config;
 import org.example.dtos.request.CompanyRequestDTO;
 import org.example.dtos.request.VehicleRequestDTO;
 import org.example.dtos.response.CompanyResponseDTO;
+import org.example.dtos.response.VehicleParkingRecordDTO;
 import org.example.dtos.response.VehicleResponseDTO;
 import org.example.models.Company;
 import org.example.models.Vehicle;
+import org.example.models.VehicleParkingRecord;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.modelmapper.convention.MatchingStrategies;
@@ -52,6 +54,16 @@ public class ModelMapperConfig {
             mapper.map(Vehicle::getColor, VehicleResponseDTO::setColor);
             mapper.map(Vehicle::getPlate, VehicleResponseDTO::setPlate);
             mapper.map(Vehicle::getType, VehicleResponseDTO::setType);
+        });
+
+        // Mapeamento para VehicleParkingRecord, mapeando apenas o ID do Vehicle
+        TypeMap<VehicleParkingRecord, VehicleParkingRecordDTO> recordMap = modelMapper.createTypeMap(VehicleParkingRecord.class, VehicleParkingRecordDTO.class);
+        recordMap.addMappings(mapper -> {
+            // Mapeia o ID do veículo, em vez do objeto Vehicle completo
+            mapper.map(src -> src.getVehicle().getId(), VehicleParkingRecordDTO::setVehicleId);
+            mapper.map(VehicleParkingRecord::getEntryTime, VehicleParkingRecordDTO::setEntryTime);
+            mapper.map(VehicleParkingRecord::getExitTime, VehicleParkingRecordDTO::setExitTime);
+            mapper.map(VehicleParkingRecord::getStatus, VehicleParkingRecordDTO::setStatus);
         });
 
         return modelMapper;

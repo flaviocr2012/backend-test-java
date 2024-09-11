@@ -6,7 +6,7 @@ import org.example.models.Company;
 import org.example.models.Vehicle;
 import org.example.repositories.CompanyRepository;
 import org.example.repositories.VehicleRepository;
-import org.example.services.services.VehicleService;
+import org.example.services.interfaces.VehicleService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

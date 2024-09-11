@@ -3,7 +3,7 @@ package org.example.controllers;
 import jakarta.validation.Valid;
 import org.example.dtos.request.VehicleRequestDTO;
 import org.example.dtos.response.VehicleResponseDTO;
-import org.example.services.services.VehicleService;
+import org.example.services.interfaces.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

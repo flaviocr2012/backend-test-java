@@ -1,12 +1,11 @@
 package org.example.services.impl;
 
-import lombok.extern.slf4j.Slf4j;
 import org.example.dtos.request.CompanyRequestDTO;
 import org.example.dtos.response.CompanyResponseDTO;
 import org.example.models.Company;
 import org.example.models.Phone;
 import org.example.repositories.CompanyRepository;
-import org.example.services.CompanyService;
+import org.example.services.interfaces.CompanyService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

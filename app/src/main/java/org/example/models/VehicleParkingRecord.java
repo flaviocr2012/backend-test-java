@@ -15,38 +15,33 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.enums.ParkingStatus;
-import org.example.enums.VehicleType;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "vehicle")
-public class Vehicle {
+@Table(name = "vehicle_parking_record")
+public class VehicleParkingRecord {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vehicle_seq")
-    @SequenceGenerator(name = "vehicle_seq", sequenceName = "vehicle_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "parking_record_seq")
+    @SequenceGenerator(name = "parking_record_seq", sequenceName = "parking_record_sequence", allocationSize = 1)
     private Long id;
 
-    @Column(nullable = false)
-    private String brand;
+    @ManyToOne
+    @JoinColumn(name = "vehicle_id", nullable = false)
+    private Vehicle vehicle;
 
     @Column(nullable = false)
-    private String model;
+    private LocalDateTime entryTime;
 
-    @Column(nullable = false)
-    private String color;
-
-    @Column(nullable = false, unique = true)
-    private String plate;
+    @Column
+    private LocalDateTime exitTime;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private VehicleType type;
-
-    @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
-    private Company company;
-
+    private ParkingStatus status;
 }
+

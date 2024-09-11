@@ -1,4 +1,4 @@
-package org.example.services;
+package org.example.services.interfaces;
 
 import org.example.dtos.request.CompanyRequestDTO;
 import org.example.dtos.response.CompanyResponseDTO;
