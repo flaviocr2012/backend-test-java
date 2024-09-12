@@ -11,8 +11,8 @@ public interface VehicleParkingRecordService {
     VehicleParkingRecordDTO registerVehicleEntry(Long vehicleId);
     VehicleParkingRecordDTO registerVehicleExit(Long vehicleId);
 
-    VehicleSummaryDTO getVehicleSummary();
-    List<VehicleHourlySummaryDTO> getVehicleHourlySummary();
-    GeneralReportDTO generateGeneralReport();
+    VehicleSummaryDTO getVehicleSummary(Long companyId);
+    List<VehicleHourlySummaryDTO> getVehicleHourlySummary(Long companyId);
+    GeneralReportDTO generateGeneralReport(Long companyId);
 }
 

@@ -37,13 +37,11 @@ public class VehicleParkingRecordServiceImpl implements VehicleParkingRecordServ
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
                 .orElseThrow(() -> new IllegalArgumentException("Vehicle not found."));
 
-        // Verifica se o veículo já está dentro com base no último registro de entrada
         VehicleParkingRecord lastRecord = parkingRecordRepository.findTopByVehicleOrderByEntryTimeDesc(vehicle);
         if (lastRecord != null && lastRecord.getStatus() == ParkingStatus.IN) {
             throw new IllegalStateException("Vehicle is already inside.");
         }
 
-        // Cria um novo registro de entrada
         VehicleParkingRecord record = new VehicleParkingRecord();
         record.setVehicle(vehicle);
         record.setEntryTime(LocalDateTime.now());
@@ -59,13 +57,11 @@ public class VehicleParkingRecordServiceImpl implements VehicleParkingRecordServ
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
                 .orElseThrow(() -> new IllegalArgumentException("Vehicle not found."));
 
-        // Encontra o registro mais recente de entrada do veículo
         VehicleParkingRecord lastRecord = parkingRecordRepository.findTopByVehicleOrderByEntryTimeDesc(vehicle);
         if (lastRecord == null || lastRecord.getStatus() == ParkingStatus.OUT) {
             throw new IllegalStateException("Vehicle is not inside.");
         }
 
-        // Atualiza o registro com o horário de saída
         lastRecord.setExitTime(LocalDateTime.now());
         lastRecord.setStatus(ParkingStatus.OUT);
 
@@ -75,33 +71,31 @@ public class VehicleParkingRecordServiceImpl implements VehicleParkingRecordServ
     }
 
     @Override
-    public VehicleSummaryDTO getVehicleSummary() {
-        long totalEntries = parkingRecordRepository.countByStatus(ParkingStatus.IN);
-        long totalExits = parkingRecordRepository.countByStatus(ParkingStatus.OUT);
+    public VehicleSummaryDTO getVehicleSummary(Long companyId) {
+        long totalEntries = parkingRecordRepository.countByStatusAndVehicle_Company_Id(ParkingStatus.IN, companyId);
+        long totalExits = parkingRecordRepository.countByStatusAndVehicle_Company_Id(ParkingStatus.OUT, companyId);
 
         return new VehicleSummaryDTO(totalEntries, totalExits);
     }
 
     @Override
-    public List<VehicleHourlySummaryDTO> getVehicleHourlySummary() {
-        // Implementar a lógica para agregar dados por hora
-        List<VehicleHourlySummaryDTO> summaries = parkingRecordRepository.findHourlySummary();
+    public List<VehicleHourlySummaryDTO> getVehicleHourlySummary(Long companyId) {
+        List<VehicleHourlySummaryDTO> summaries = parkingRecordRepository.findHourlySummaryByCompanyId(companyId);
         return summaries;
     }
 
     @Override
-    public GeneralReportDTO generateGeneralReport() {
-        long totalVehicles = vehicleRepository.count();
-        long totalCars = vehicleRepository.countByType(VehicleType.CAR);
-        long totalMotorcycles = vehicleRepository.countByType(VehicleType.MOTORCYCLE);
-        long totalEntries = parkingRecordRepository.countByStatus(ParkingStatus.IN);
-        long totalExits = parkingRecordRepository.countByStatus(ParkingStatus.OUT);
-        List<VehicleHourlySummaryDTO> hourlySummary = parkingRecordRepository.findHourlySummary();
+    public GeneralReportDTO generateGeneralReport(Long companyId) {
+        long totalVehicles = parkingRecordRepository.countVehiclesByCompanyId(companyId);
+        long totalCars = parkingRecordRepository.countVehiclesByTypeAndCompanyId(companyId, VehicleType.CAR);
+        long totalMotorcycles = parkingRecordRepository.countVehiclesByTypeAndCompanyId(companyId, VehicleType.MOTORCYCLE);
+        long totalEntries = parkingRecordRepository.countByStatusAndVehicle_Company_Id(ParkingStatus.IN, companyId);
+        long totalExits = parkingRecordRepository.countByStatusAndVehicle_Company_Id(ParkingStatus.OUT, companyId);
+        List<VehicleHourlySummaryDTO> hourlySummary = parkingRecordRepository.findHourlySummaryByCompanyId(companyId);
 
         return new GeneralReportDTO(totalVehicles, totalCars, totalMotorcycles, totalEntries, totalExits, hourlySummary);
     }
-
-
 }
+
 
 

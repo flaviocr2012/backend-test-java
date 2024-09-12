@@ -34,22 +34,23 @@ public class VehicleParkingRecordController {
         return ResponseEntity.ok(record);
     }
 
-    @GetMapping("/summary")
-    public ResponseEntity<VehicleSummaryDTO> getVehicleSummary() {
-        VehicleSummaryDTO summary = vehicleParkingRecordService.getVehicleSummary();
+    @GetMapping("/summary/{companyId}")
+    public ResponseEntity<VehicleSummaryDTO> getVehicleSummary(@PathVariable Long companyId) {
+        VehicleSummaryDTO summary = vehicleParkingRecordService.getVehicleSummary(companyId);
         return ResponseEntity.ok(summary);
     }
 
-    @GetMapping("/summary/hourly")
-    public ResponseEntity<List<VehicleHourlySummaryDTO>> getVehicleHourlySummary() {
-        List<VehicleHourlySummaryDTO> summaries = vehicleParkingRecordService.getVehicleHourlySummary();
+    @GetMapping("/summary/hourly/{companyId}")
+    public ResponseEntity<List<VehicleHourlySummaryDTO>> getVehicleHourlySummary(@PathVariable Long companyId) {
+        List<VehicleHourlySummaryDTO> summaries = vehicleParkingRecordService.getVehicleHourlySummary(companyId);
         return ResponseEntity.ok(summaries);
     }
 
-    @GetMapping("/report")
-    public ResponseEntity<GeneralReportDTO> getGeneralReport() {
-        GeneralReportDTO report = vehicleParkingRecordService.generateGeneralReport();
+    @GetMapping("/report/{companyId}")
+    public ResponseEntity<GeneralReportDTO> getGeneralReport(@PathVariable Long companyId) {
+        GeneralReportDTO report = vehicleParkingRecordService.generateGeneralReport(companyId);
         return ResponseEntity.ok(report);
     }
+
 }
 
