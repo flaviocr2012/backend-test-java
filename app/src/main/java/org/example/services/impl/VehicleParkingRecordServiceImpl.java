@@ -1,7 +1,11 @@
 package org.example.services.impl;
 
+import org.example.dtos.response.GeneralReportDTO;
+import org.example.dtos.response.VehicleHourlySummaryDTO;
+import org.example.dtos.response.VehicleSummaryDTO;
 import org.example.dtos.response.VehicleParkingRecordDTO;
 import org.example.enums.ParkingStatus;
+import org.example.enums.VehicleType;
 import org.example.models.Vehicle;
 import org.example.models.VehicleParkingRecord;
 import org.example.repositories.VehicleParkingRecordRepository;
@@ -12,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class VehicleParkingRecordServiceImpl implements VehicleParkingRecordService {
@@ -68,6 +73,35 @@ public class VehicleParkingRecordServiceImpl implements VehicleParkingRecordServ
 
         return modelMapper.map(lastRecord, VehicleParkingRecordDTO.class);
     }
+
+    @Override
+    public VehicleSummaryDTO getVehicleSummary() {
+        long totalEntries = parkingRecordRepository.countByStatus(ParkingStatus.IN);
+        long totalExits = parkingRecordRepository.countByStatus(ParkingStatus.OUT);
+
+        return new VehicleSummaryDTO(totalEntries, totalExits);
+    }
+
+    @Override
+    public List<VehicleHourlySummaryDTO> getVehicleHourlySummary() {
+        // Implementar a lógica para agregar dados por hora
+        List<VehicleHourlySummaryDTO> summaries = parkingRecordRepository.findHourlySummary();
+        return summaries;
+    }
+
+    @Override
+    public GeneralReportDTO generateGeneralReport() {
+        long totalVehicles = vehicleRepository.count();
+        long totalCars = vehicleRepository.countByType(VehicleType.CAR);
+        long totalMotorcycles = vehicleRepository.countByType(VehicleType.MOTORCYCLE);
+        long totalEntries = parkingRecordRepository.countByStatus(ParkingStatus.IN);
+        long totalExits = parkingRecordRepository.countByStatus(ParkingStatus.OUT);
+        List<VehicleHourlySummaryDTO> hourlySummary = parkingRecordRepository.findHourlySummary();
+
+        return new GeneralReportDTO(totalVehicles, totalCars, totalMotorcycles, totalEntries, totalExits, hourlySummary);
+    }
+
+
 }
 
 
