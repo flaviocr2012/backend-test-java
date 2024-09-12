@@ -1,5 +1,7 @@
 package org.example.controllers;
 
+import org.example.constants.Constants;
+import org.example.exceptions.company.UsernameAlreadyTakenException;
 import org.example.models.User;
 import org.example.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +25,16 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-            return ResponseEntity.badRequest().body("Username is already taken.");
+            throw new UsernameAlreadyTakenException(Constants.USERNAME_TAKEN);
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("ROLE_USER");
+        user.setRole(Constants.DEFAULT_USER_ROLE);
         userRepository.save(user);
 
-        return ResponseEntity.ok("User registered successfully.");
+        return ResponseEntity.ok(Constants.USER_REGISTERED_SUCCESSFULLY);
     }
+
 }
+
 

@@ -1,4 +1,4 @@
-package org.example.config;
+package org.example.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +33,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/vehicles/**").authenticated()
                         .requestMatchers("/api/companies/**").authenticated()
+                        .requestMatchers("/api/vehicle-parking-records/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 .formLogin(withDefaults())

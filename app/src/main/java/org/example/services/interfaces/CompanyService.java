@@ -2,6 +2,7 @@ package org.example.services.interfaces;
 
 import org.example.dtos.request.CompanyRequestDTO;
 import org.example.dtos.response.CompanyResponseDTO;
+import org.example.exceptions.company.CompanyDeletionException;
 
 import java.util.List;
 
@@ -15,6 +16,6 @@ public interface CompanyService {
 
     CompanyResponseDTO updateCompany(Long id, CompanyRequestDTO companyRequestDTO);
 
-    void deleteCompany(Long id);
+    void deleteCompany(Long id) throws CompanyDeletionException;
 
 }

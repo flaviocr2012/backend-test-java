@@ -1,7 +1,8 @@
 package org.example.controllers;
 
 import org.example.models.User;
-import org.example.services.impl.UserService;
+import org.example.repositories.UserService;
+import org.example.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,4 +27,5 @@ public class UserController {
         return ResponseEntity.ok(savedUser);
     }
 }
+
 
