@@ -6,7 +6,9 @@ import org.example.exceptions.company.CompanyNotFoundException;
 import org.example.exceptions.company.InvalidParkingSpotsException;
 import org.example.exceptions.company.UsernameAlreadyTakenException;
 import org.example.exceptions.vehicle.VehicleAlreadyExistsException;
+import org.example.exceptions.vehicle.VehicleAlreadyInsideException;
 import org.example.exceptions.vehicle.VehicleNotFoundException;
+import org.example.exceptions.vehicle.VehicleNotInsideException;
 import org.hibernate.PropertyValueException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,12 +44,21 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
     }
 
+    @ExceptionHandler(VehicleAlreadyInsideException.class)
+    public ResponseEntity<String> handleVehicleAlreadyInsideException(VehicleAlreadyInsideException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(VehicleNotInsideException.class)
+    public ResponseEntity<String> handleVehicleNotInsideException(VehicleNotInsideException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<?> handleTypeMismatchException(MethodArgumentTypeMismatchException ex) {
         String errorMessage = String.format("Invalid value '%s' for field '%s'.", ex.getValue(), ex.getName());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
     }
-
 
     @ExceptionHandler(CompanyDeletionException.class)
     public ResponseEntity<?> handleCompanyDeletionException(CompanyDeletionException ex) {

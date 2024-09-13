@@ -10,6 +10,8 @@ public class Constants {
     public static final String COMPANY_HAS_VEHICLES =  "Company has vehicles, cannot be deleted";
     public static final String VEHICLE_NOT_FOUND = "Vehicle not found.";
     public static final String VEHICLE_ALREADY_EXISTS = "A vehicle with this plate already exists.";
+    public static final String VEHICLE_ALREADY_INSIDE = "Vehicle is already inside.";
+    public static final String VEHICLE_NOT_INSIDE = "Vehicle is not inside.";
 }
 
 
