@@ -168,11 +168,11 @@ gradle test
    
    **Pergunta 3: Quais seriam as vantagens e desvantagens de utilizar um banco de dados NoSQL neste projeto?**
     
-        * Vantagens:
+        Vantagens:
         * Escalabilidade: Os bancos de dados NoSQL são altamente escaláveis e podem lidar com grandes volumes de dados e tráfego.
         * Flexibilidade: Os bancos de dados NoSQL permitem armazenar dados de diferentes tipos e formatos sem a necessidade de um esquema rígido.
         * Desempenho: Os bancos de dados NoSQL são otimizados para consultas rápidas e eficientes em grandes conjuntos de dados.
-        * Desvantagens:
+        Desvantagens:
         * Consistência: Os bancos de dados NoSQL geralmente sacrificam a consistência em favor da disponibilidade e da tolerância a falhas.
         * Complexidade: Os bancos de dados NoSQL podem ser mais complexos de configurar e gerenciar do que os bancos de dados relacionais tradicionais.
         * Menos suporte: Os bancos de dados NoSQL podem ter menos suporte e documentação do que os bancos de dados relacionais estabelecidos.
@@ -184,6 +184,7 @@ gradle test
     Metodologias ágeis são abordagens de desenvolvimento de software que enfatizam a colaboração, a comunicação, a adaptação e a entrega contínua de valor ao cliente. 
     As metodologias ágeis valorizam indivíduos e interações mais do que processos e ferramentas, software funcionando mais do que documentação abrangente, colaboração com o cliente mais do que negociação de contratos e responder a mudanças mais do que seguir um plano rígido. 
     As metodologias ágeis impactam o desenvolvimento de software ao promoverem a entrega contínua de valor ao cliente, a adaptação a mudanças nos requisitos e a colaboração eficaz entre as equipes de desenvolvimento e os stakeholders.
+
    **Pergunta 2: No desenvolvimento deste projeto, como você aplicaria princípios ágeis para garantir entregas contínuas e com qualidade?**
 
    Para garantir entregas contínuas e com qualidade no desenvolvimento deste projeto, eu aplicaria os seguintes princípios ágeis:
@@ -193,7 +194,8 @@ gradle test
     * Comunicação: Manteria uma comunicação clara e eficaz com a equipe de desenvolvimento e os stakeholders para garantir que todos estejam alinhados com os objetivos do projeto.
     * Iteração: Utilizaria ciclos curtos de desenvolvimento para iterar rapidamente e obter feedback dos usuários.
     * Priorização: Priorizaria as funcionalidades com base no valor para o cliente e na complexidade técnica para garantir que o software seja entregue de forma eficiente.
-   Pergunta 3: Qual a importância da comunicação entre as equipes em um ambiente ágil? Dê exemplos de boas práticas.
+   
+   **Pergunta 3: Qual a importância da comunicação entre as equipes em um ambiente ágil? Dê exemplos de boas práticas.**
 
 3. **DevOps (Nível Básico)**
    **Pergunta 1: O que é DevOps e qual a sua importância para o ciclo de vida de uma aplicação?**
