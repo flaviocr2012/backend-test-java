@@ -55,6 +55,9 @@ To run the tests, execute the following command:
 ```bash
 gradle test
 ```
+
+3. **Tomcat Server** The application runs on port 8000. You can access the Swagger UI at `http://localhost:8000/swagger-ui.html`. 
+
 ## API Endpoints
 
 ### Authentication Controller
@@ -198,6 +201,15 @@ gradle test
     * Priorização: Priorizaria as funcionalidades com base no valor para o cliente e na complexidade técnica para garantir que o software seja entregue de forma eficiente.
    
    **Pergunta 3: Qual a importância da comunicação entre as equipes em um ambiente ágil? Dê exemplos de boas práticas.**
+
+    A comunicação entre as equipes em um ambiente ágil é fundamental para o sucesso do projeto. A comunicação eficaz ajuda a garantir que todos os membros da equipe estejam alinhados com os objetivos do projeto, entendam suas responsabilidades e possam colaborar de forma eficaz. 
+    Alguns exemplos de boas práticas de comunicação em um ambiente ágil incluem:
+    * Reuniões diárias: Realizar reuniões diárias curtas para atualizar a equipe sobre o progresso, identificar impedimentos e alinhar as atividades do dia.
+    * Retrospectivas: Realizar retrospectivas regulares para revisar o trabalho realizado, identificar oportunidades de melhoria e planejar ações corretivas.
+    * Quadros Kanban: Utilizar quadros Kanban visuais para acompanhar o progresso das tarefas, identificar gargalos e facilitar a comunicação entre os membros da equipe.
+    * Comunicação aberta: Encorajar a comunicação aberta e transparente entre os membros da equipe, os stakeholders e os clientes para garantir que todos estejam alinhados com os objetivos do projeto.
+    * Ferramentas de colaboração: Utilizar ferramentas de colaboração como Slack, Microsoft Teams ou Google Meet para facilitar a comunicação remota e a colaboração entre os membros da equipe.    
+    
 
 3. **DevOps (Nível Básico)**
 
