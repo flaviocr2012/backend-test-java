@@ -60,12 +60,17 @@ dependencies {
     implementation("org.springframework.security:spring-security-config:6.2.0")
     implementation("org.springframework.security:spring-security-web:6.3.0")
 
+    implementation ("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+
+    implementation("javax.servlet:javax.servlet-api:4.0.1")
+
 
     // Dependências para testes
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
     testImplementation("org.mockito:mockito-core:5.5.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
 }
 
 tasks.named<Test>("test") {
