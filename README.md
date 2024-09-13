@@ -153,6 +153,7 @@ gradle test
 # Questionário para Avaliação de Competências
 1. **Banco de Dados (Nível Básico)**
 
+
    **Pergunta 1: Explique os principais conceitos de um banco de dados relacional, como tabelas, chaves primárias e estrangeiras.**
 
     *  Tabelas: Em um banco de dados relacional, uma tabela é uma coleção de dados organizados em linhas e colunas. 
@@ -179,6 +180,7 @@ gradle test
 
 2. **Agilidade (Nível Básico)**
 
+
    **Pergunta 1: Explique o conceito de metodologias ágeis e como elas impactam o desenvolvimento de software.**
     
     Metodologias ágeis são abordagens de desenvolvimento de software que enfatizam a colaboração, a comunicação, a adaptação e a entrega contínua de valor ao cliente. 
@@ -198,6 +200,8 @@ gradle test
    **Pergunta 3: Qual a importância da comunicação entre as equipes em um ambiente ágil? Dê exemplos de boas práticas.**
 
 3. **DevOps (Nível Básico)**
+
+
    **Pergunta 1: O que é DevOps e qual a sua importância para o ciclo de vida de uma aplicação?**
 
     DevOps é uma cultura e prática que combina o desenvolvimento de software (Dev) e a operação de infraestrutura (Ops) para acelerar o ciclo de vida de uma aplicação. 
