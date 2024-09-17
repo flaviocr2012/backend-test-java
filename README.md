@@ -17,6 +17,10 @@
 * **Docker**: Used to containerize the application.
 * **Docker Compose**: Used to define and run multi-container Docker applications. 
 
+## Data Modelling
+
+![Data_Modelling](images/data_modelling.png)
+
 ## Prerequisites
 * **Docker**: Ensure Docker is installed on your machine.
 * **Docker Compose**: Ensure Docker Compose is installed to manage multi-container applications.
