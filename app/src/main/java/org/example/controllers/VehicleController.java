@@ -10,16 +10,10 @@ import org.example.dtos.request.VehicleRequestDTO;
 import org.example.dtos.response.VehicleResponseDTO;
 import org.example.services.interfaces.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,74 +28,104 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
+    @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Operation(summary = "Create a new vehicle")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vehicle created successfully",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = VehicleResponseDTO.class))),
+                    content = {
+                            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = VehicleResponseDTO.class)),
+                            @Content(mediaType = MediaType.APPLICATION_XML_VALUE,
+                                    schema = @Schema(implementation = VehicleResponseDTO.class))
+                    }),
             @ApiResponse(responseCode = "400", description = "Invalid input",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class)))
+                    content = {
+                            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = String.class)),
+                            @Content(mediaType = MediaType.APPLICATION_XML_VALUE,
+                                    schema = @Schema(implementation = String.class))
+                    })
     })
-    @PostMapping
     public ResponseEntity<VehicleResponseDTO> createVehicle(@Valid @RequestBody VehicleRequestDTO vehicleRequestDTO) {
         VehicleResponseDTO createdVehicle = vehicleService.createVehicle(vehicleRequestDTO);
         return ResponseEntity.ok(createdVehicle);
     }
 
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Operation(summary = "Get a vehicle by ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vehicle found",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = VehicleResponseDTO.class))),
+                    content = {
+                            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = VehicleResponseDTO.class)),
+                            @Content(mediaType = MediaType.APPLICATION_XML_VALUE,
+                                    schema = @Schema(implementation = VehicleResponseDTO.class))
+                    }),
             @ApiResponse(responseCode = "404", description = "Vehicle not found",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class)))
+                    content = {
+                            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = String.class)),
+                            @Content(mediaType = MediaType.APPLICATION_XML_VALUE,
+                                    schema = @Schema(implementation = String.class))
+                    })
     })
-    @GetMapping("/{id}")
     public ResponseEntity<VehicleResponseDTO> getVehicleById(@PathVariable Long id) {
         VehicleResponseDTO vehicle = vehicleService.getVehicleById(id);
         return ResponseEntity.ok(vehicle);
     }
-
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Operation(summary = "Get all vehicles")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vehicles retrieved successfully",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = VehicleResponseDTO.class)))
+                    content = {
+                            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = VehicleResponseDTO.class)),
+                            @Content(mediaType = MediaType.APPLICATION_XML_VALUE,
+                                    schema = @Schema(implementation = VehicleResponseDTO.class))
+                    })
     })
-    @GetMapping
     public ResponseEntity<List<VehicleResponseDTO>> getAllVehicles() {
         List<VehicleResponseDTO> vehicles = vehicleService.getAllVehicles();
         return ResponseEntity.ok(vehicles);
     }
-
+    @PutMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Operation(summary = "Update a vehicle by ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vehicle updated successfully",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = VehicleResponseDTO.class))),
+                    content = {
+                            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = VehicleResponseDTO.class)),
+                            @Content(mediaType = MediaType.APPLICATION_XML_VALUE,
+                                    schema = @Schema(implementation = VehicleResponseDTO.class))
+                    }),
             @ApiResponse(responseCode = "404", description = "Vehicle not found",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class)))
+                    content = {
+                            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = String.class)),
+                            @Content(mediaType = MediaType.APPLICATION_XML_VALUE,
+                                    schema = @Schema(implementation = String.class))
+                    })
     })
-    @PutMapping("/{id}")
     public ResponseEntity<VehicleResponseDTO> updateVehicle(@PathVariable Long id, @RequestBody @Validated VehicleRequestDTO vehicleRequestDTO) {
         VehicleResponseDTO updatedVehicle = vehicleService.updateVehicle(id, vehicleRequestDTO);
         return ResponseEntity.ok(updatedVehicle);
     }
-
+    @DeleteMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Operation(summary = "Delete a vehicle by ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Vehicle deleted successfully"),
             @ApiResponse(responseCode = "404", description = "Vehicle not found",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class)))
+                    content = {
+                            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = String.class)),
+                            @Content(mediaType = MediaType.APPLICATION_XML_VALUE,
+                                    schema = @Schema(implementation = String.class))
+                    })
     })
-    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteVehicle(@PathVariable Long id) {
         vehicleService.deleteVehicle(id);
         return ResponseEntity.noContent().build();
     }
 }
+
 

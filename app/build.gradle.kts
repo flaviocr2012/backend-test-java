@@ -63,6 +63,7 @@ dependencies {
     implementation ("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
 
     implementation("javax.servlet:javax.servlet-api:4.0.1")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0")
 
 
     // Dependências para testes
